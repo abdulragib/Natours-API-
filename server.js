@@ -14,6 +14,22 @@ mongoose.connect(DB).then((con) => {
   console.log('DB Connection Sucessful!');
 });
 
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true,'A tour must have name'],
+    unique:true
+  },
+  rating:{
+    type:Number,
+    default:4.5,
+  },
+  price: {
+    type:Number,
+    required:[true, 'A tour must have price'],
+  },
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App Running on Port ${port}...`);
