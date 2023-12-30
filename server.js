@@ -31,7 +31,7 @@ const tourSchema = new mongoose.Schema({
 });
 
 const Tour=mongoose.model('Tour',tourSchema);
-
+console.log(Tour)
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
