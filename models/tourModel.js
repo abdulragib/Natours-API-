@@ -6,7 +6,7 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have name'],
     unique: true,
   },
-  durations: {
+  duration: {
     type: Number,
     required: [true, 'A tour must have duration'],
   },
@@ -53,10 +53,10 @@ const tourSchema = new mongoose.Schema({
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
-const testTour = new Tour({
-  name: 'The Mountain Hiker',
-  rating: 4.7,
-  price: 497,
-});
+// const testTour = new Tour({
+//   name: 'The Mountain Hiker',
+//   rating: 4.7,
+//   price: 497,
+// });
 
 module.exports = Tour;
