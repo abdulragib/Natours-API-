@@ -1,12 +1,17 @@
 const AppError = require('./../Utils/appError');
 
 const handleCastErrorDB = (err) => {
-  const message = `Invalid ${err.path} : ${err.value}.`;
-  return new AppError(message, 400);
+  if (process.env.NODE_ENV.trim() === 'production'){
+    const message = `Invalid ${err.path} : ${err.value}.`;
+    return new AppError(message, 400);
+  } else{
+    return new AppError('No tour found with that ID', 404)
+  }
 };
 
+
+
 const sendErrorDev = (err, res) => {
-  
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
@@ -38,20 +43,20 @@ const sendErrorProd = (err, res) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-  
+
   if (process.env.NODE_ENV === 'development') {
+    let error= {...err}
+    if(err.name==='CastError'){
+      error= handleCastErrorDB(error);
+    }
+
+    sendErrorDev(error, res);
     
-    sendErrorDev(err, res);
-    console.log("dev mode")
   } else if (process.env.NODE_ENV.trim() === 'production') {
     let error = { ...err };
-    console.log(error)
-    console.log(err.name)
-    console.log("err",err)
 
     if (err.name === 'CastError') {
       error = handleCastErrorDB(error);
-      console.log("handle it")
     }
 
     sendErrorProd(error, res);
