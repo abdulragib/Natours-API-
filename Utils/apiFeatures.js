@@ -13,7 +13,7 @@ class APIFeatures {
     console.log(queryObj);
 
     //1B) Advance filtering
-
+    //?price[gte]=500
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`); //regular expression
 
@@ -24,6 +24,7 @@ class APIFeatures {
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
+      //sort=price
       this.query = this.query.sort(sortBy);
     } else {
       this.query = this.query.sort('-createdAt');
@@ -34,6 +35,7 @@ class APIFeatures {
   limitFields() {
     if (this.queryString.fields) {
       const fields = this.queryString.fields.split(',').join(' ');
+      //fields=price,duration
       this.query = this.query.select(fields);
     } else {
       this.query = this.query.select('-__v');
