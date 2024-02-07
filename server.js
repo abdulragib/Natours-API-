@@ -24,6 +24,8 @@ const connectDB = async () => {
 
 connectDB();
 
+console.log(process.env)
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App Running on Port ${port}...`);
@@ -32,5 +34,4 @@ app.listen(port, () => {
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLER REJECTION! 🔥 Shutting down..');
   console.log(err.name, err.message);
-  process.exit(1);
 });
