@@ -7,7 +7,7 @@ class APIFeatures {
   filter() {
     //BUILD QUERY
     //  1A) Filtering
-    const queryObj = { ...this.queryString };
+    const queryObj = { ...this.queryString }; //creating copy 
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
     console.log(queryObj);
