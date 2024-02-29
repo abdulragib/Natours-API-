@@ -41,6 +41,11 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 
 userSchema.pre('save', async function (next) {
@@ -55,12 +60,19 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.pre('save',function(next){
-  if(!this.isModified('password') || this.isNew) return next();
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
 
-  this.passwordChangedAt=Date.now() - 1000;
+  this.passwordChangedAt = Date.now() - 1000;
   next();
-})
+});
+
+//for deleting user on frontend , not database
+userSchema.pre(/^find/, function (next) {
+  //this points to current query
+  this.find({ active: { $ne: false } });
+  next();
+});
 
 //instance methods
 userSchema.methods.correctPassword = async function (
@@ -90,10 +102,10 @@ userSchema.methods.createPasswordResetToken = function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-    
-    console.log({resetToken}, this.passwordResetToken)
-    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-    return resetToken;
+
+  console.log({ resetToken }, this.passwordResetToken);
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  return resetToken;
 };
 
 const User = mongoose.model('User', userSchema);
