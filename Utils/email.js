@@ -10,8 +10,8 @@ const sendEmail = async (options) => {
     debug:true,
     secureConnection:false,
     auth: {
-      user: 'abdulragib36@gmail.com',
-      pass: 'lvxf qpeb yqyt xfdg',
+      user: process.env.USER,
+      pass: process.env.PASSWORD,
     },
     tls:{
       rejectUnauthorized:true
