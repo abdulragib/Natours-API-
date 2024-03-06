@@ -3,8 +3,12 @@ const express = require('express');
 const authController = require('./../controllers/authController');
 
 const router = express.Router({
-  mergeParams:true
+  mergeParams: true,
 });
+
+//POST /tours/1f6fd7sdh2/reviews
+//GET /tours/1f6fd7sdh2/reviews
+//POST /reviews
 
 router
   .route('/')
@@ -14,4 +18,6 @@ router
     authController.restrictTo('user'),
     reviewController.createReview,
   );
+
+router.route('/:id').delete(reviewController.deleteReview);
 module.exports = router;
