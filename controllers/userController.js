@@ -11,7 +11,10 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-
+exports.getMe=(req,res,next)=>{
+  req.params.id=req.user.id;
+  next();
+}
 
 exports.updateMe = async (req, res, next) => {
   //1) Create error if user Post password data
@@ -48,8 +51,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-
-
 
 exports.createUser = (req, res) => {
   res.status(500).json({
