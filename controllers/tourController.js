@@ -1,4 +1,4 @@
-const Tour = require('./../models/tourModel');
+const Tour = require('../models/tourModal');
 const APIFeatures = require('./../Utils/apiFeatures');
 const catchAsync = require('./../Utils/catchAsync');
 const AppError = require('./../Utils/appError');
@@ -12,9 +12,7 @@ exports.aliasTopTours = (req, res, next) => {
 };
 
 exports.getAllTours = factory.getAll(Tour);
-
-exports.getTour = factory.getOne(Tour,{path:'reviews'})
-
+exports.getTour = factory.getOne(Tour, { path: 'reviews' });
 exports.createTour = factory.createOne(Tour);
 exports.updateTour = factory.updateOne(Tour);
 exports.deleteTour = factory.deleteOne(Tour);
