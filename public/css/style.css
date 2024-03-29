@@ -877,16 +877,19 @@ body {
   -ms-flex: 0 1 40%;
   flex: 0 1 40%;
 }
+
 @media only screen and (max-width: 62.5em) {
   .nav--tours {
     margin-bottom: 1.5rem;
   }
 }
+
 @media only screen and (max-width: 37.5em) {
   .nav--tours {
     margin-bottom: 0;
   }
 }
+
 .nav--user {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 40%;
@@ -1109,7 +1112,7 @@ body {
 }
 .card__picture-overlay {
   position: absolute;
-  width: 100%;
+  width: 100% !important;
   height: 100%;
   background-image: -webkit-gradient(
     linear,
@@ -1125,8 +1128,9 @@ body {
   -o-object-fit: cover;
   object-fit: cover;
   height: 100%;
-  width: 100%;
+  width: 100% !important;
 }
+
 .card__details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1173,7 +1177,8 @@ body {
   grid-template-columns: auto 1fr;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
-  margin-top: auto;
+  margin-top: auto !important;
+  width:100%;
 }
 .card__footer-value {
   font-weight: 700;
